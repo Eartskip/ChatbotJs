@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .reponse, #question1, #question2, #question3, #question4 {
+            opacity: 0;
+            animation: fadeInAnimation 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeInAnimation {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="position-window">
+        <div class="position-bulle">
+            <div id="bulle"><img id="chat" src="./ressources/arrow.png" alt="icon chat"></div>
+        </div>
+        <div class="content-Chatbot" id="conversation-container">
+            <p id="conversation">Bonjour ! Comment puis-je vous aider ?</p>
+            <div class="btn-container">
+                <button id="question1" onclick="afficherReponse(this.id)">Comment le changement climatique peut-il influencer la biodiversité ?</button>
+                <button id="question2" onclick="afficherReponse(this.id)">Qu'est-ce que le réchauffement climatique ?</button>
+                <button id="question3" onclick="afficherReponse(this.id)">Quels secteurs sont généralement considérés comme les plus émetteurs de gaz à effet de serre ?</button>
+                <button id="question4" onclick="afficherReponse(this.id)">Quelle est la principale source d'émissions de dioxyde de carbone dans le secteur de l'énergie ?</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function afficherReponse(id) {
+            let question;
+            let reponse;
+            switch(id) {
+                case "question1":
+                    reponse = "En provoquant la disparition de certaines espèces.<br> Besoin de plus de précisions ?";
+                    break;
+                case "question2":
+                    reponse = "Un réchauffement progressif de la Terre.<br> Besoin de plus de précisions ?";
+                    break;
+                case "question3":
+                    reponse = "Secteur des transports et de l'industrie.<br> Besoin de plus de précisions ?";
+                    break;
+                case "question4":
+                    reponse = "C'est le Charbon.<br> Besoin de plus de précisions ?";
+                    break;
+            }
+
+            const nouvelleDiv = document.createElement("div");
+            nouvelleDiv.innerHTML = reponse;
+            nouvelleDiv.className = "reponse";
+
+            const conversationContainer = document.getElementById("conversation-container");
+            conversationContainer.appendChild(nouvelleDiv);
+            conversationContainer.scrollTop = conversationContainer.scrollHeight;
+
+            afficherQuestionsDroite();
+        }
+
+        function afficherQuestionsDroite() {
+            const conversationContainer = document.getElementById("conversation-container");
+            const boutons = document.createElement("div");
+            boutons.innerHTML = `
+                <div style="justify-content: flex-end; text-align: end;">
+                    <button id="question1" onclick="afficherReponse(this.id)">Comment le changement climatique peut-il influencer la biodiversité ?</button>
+                    <button id="question2" onclick="afficherReponse(this.id)">Qu'est-ce que le réchauffement climatique ?</button>
+                    <button id="question3" onclick="afficherReponse(this.id)">Quels secteurs sont généralement considérés comme les plus émetteurs de gaz à effet de serre ?</button>
+                    <button id="question4" onclick="afficherReponse(this.id)">Quelle est la principale source d'émissions de dioxyde de carbone dans le secteur de l'énergie ?</button>
+                </div>
+            `;
+            conversationContainer.appendChild(boutons);
+        }
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>
